@@ -217,7 +217,11 @@ void Nokia5110_Reset()
 
 void Nokia5110_Set_Contrast(uint8_t contrast_value)
 {
-    // You will need to implement this function
+
+    Nokia5110_Command_Write(0x21);
+    Nokia5110_Command_Write(contrast_value);
+    Nokia5110_Command_Write(0x20);
+
 
 }
 

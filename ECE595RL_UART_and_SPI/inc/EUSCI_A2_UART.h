@@ -47,6 +47,11 @@
 void EUSCI_A2_UART_Init();
 
 /**
+ * EUSCI_A2_UART_Init_V2
+ */
+void EUSCI_A2_UART_Init_V2();
+
+/**
  * @brief Transmits a single character over UART using the EUSCI_A2 module.
  *
  * This function transmits a single character over UART using the EUSCI_A2 module.

@@ -50,6 +50,42 @@ void EUSCI_A2_UART_Init()
     EUSCI_A2->IE &= ~0x0F;
 }
 
+void EUSCI_A2_UART_Init_V2()
+{
+    // Hold the EUSCI_A2 module in reset mode
+    EUSCI_A2->CTLW0 |= 0x01;
+
+    // Set all the bits of the modulation control register to zero
+    EUSCI_A2->MCTLW &= ~0xFF;
+
+    // Hold the EUSCI_A2 module in reset mode
+    // Set the clock source to SMCLK~0x
+    // MSB first
+    // Odd parity enabled
+    // stop bit 2
+    EUSCI_A2->CTLW0 |=0xA8C1;
+
+    // Set the baud rate
+    // N = (Clock Frequency) / (Baud Rate) = (12,000,000 / 9600) = 1250
+    // Use only the integer part, so N = 1250
+    EUSCI_A2->BRW |= 1250;
+
+    // Configure P3.2 and P3.3 as primary module function
+    P3->SEL0 |= 0x0C;
+    P3->SEL1 &= ~0x0C;
+
+    // Clear the software reset bit to enable the EUSCI_A2 module
+    EUSCI_A2->CTLW0 &= ~0x01;
+
+    // Ensure that the following interrupts are disabled:
+    // - Receive Interrupt
+    // - Transmit Interrupt
+    // - Start Bit Interrupt
+    // - Transmit Complete Interrupt
+    EUSCI_A2->IE &= ~0x0F;
+}
+
+
 void EUSCI_A2_UART_OutChar(uint8_t data)
 {
     while((EUSCI_A2->IFG & 0x02) == 0);

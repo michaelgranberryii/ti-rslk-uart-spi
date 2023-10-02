@@ -34,13 +34,45 @@
 #endif
 
 #ifdef USE_NOKIA_LCD
+
+
+
 uint16_t Change_Counter_Speed()
 {
     uint8_t button_status = Get_Buttons_Status();
-    uint16_t clock_delay;
-    
-    // Your implementation goes here
+    uint16_t clock_delay = 0;
+    switch(button_status)
+    {
+        // Button 1 and Button 2 are pressed
+        case 0x00:
+        {
+            clock_delay = 1000;
+            break;
+        }
 
+        // Button 1 is pressed
+        // Button 2 is not pressed
+        case 0x10:
+        {
+            clock_delay = 200;
+            break;
+        }
+
+        // Button 1 is not pressed
+        // Button 2 is pressed
+        case 0x02:
+        {
+            clock_delay = 3000;
+            break;
+        }
+
+        // Button 1 and Button 2 are not pressed
+        case 0x12:
+        {
+            clock_delay = 1000;
+            break;
+        }
+    }
     return clock_delay;
 }
 #endif
@@ -73,6 +105,7 @@ int main()
 #endif
 
 #ifdef USE_NOKIA_LCD
+
 int main()
 {
     uint32_t counter = 0;
@@ -103,15 +136,32 @@ int main()
 
     Nokia5110_OutUDec(counter);
 
+    // Change Contrast
+    Nokia5110_Set_Contrast(250);
+
     // Turn on the red LED
     LED1_Output(RED_LED_ON);
 
     while(1)
     {
+
 //        counter = counter + 1;
 //        Nokia5110_SetCursor(0, 3);
 //        Nokia5110_OutUDec(counter);
 //        Clock_Delay1ms(1000);
+
+        // Task 4
+        uint16_t clock_delay = Change_Counter_Speed();
+        counter = counter + 1;
+        Nokia5110_SetCursor(0, 3);
+        Nokia5110_OutUDec(counter);
+        Nokia5110_SetCursor(0, 5);
+        Nokia5110_OutString("Delay");
+        Nokia5110_SetCursor(6,  5);
+        Nokia5110_OutChar(0x3D);
+        Nokia5110_SetCursor(7, 5);
+        Nokia5110_OutUDec(clock_delay);
+        Clock_Delay1ms(clock_delay);
     }
 }
 #endif

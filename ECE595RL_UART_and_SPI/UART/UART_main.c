@@ -21,9 +21,9 @@
 #include "../inc/EUSCI_A2_UART.h"
 
 // Comment or uncomment the lines to choose the UART program
-#define USE_EUSCI_A0_UART 1
+//#define USE_EUSCI_A0_UART 1
 //#define USE_EUSCI_A2_UART 1
-//#define UART_EXTERNAL_LOOPBACK 1
+#define UART_EXTERNAL_LOOPBACK 1
 
 /**
  * @brief The Transmit_UART_Data function transmits data over UART based on the status of the user buttons.
@@ -209,35 +209,25 @@ uint8_t RX_Buffer[BUFFER_LENGTH];
 
 void UART_Ramp_Data()
 {
-    // Create a for-loop that starts from index 0 to 255 (use BUFFER_LENGTH)
 
-    // Start of for-loop
+    for (int i = 0; i <= BUFFER_LENGTH; i++){
+        TX_Buffer[i] = i;
+        EUSCI_A2_UART_OutChar(i);
+        RX_Buffer[i] = EUSCI_A2_UART_InChar();
+    }
 
-    // Make a function call to OutChar here
-
-    // Assign the value of i to TX_Buffer
-
-    // Assign the value returned by InChar to RX_Buffer
-
-    // End of for-loop
 }
 
 void Validate_UART_Loopback()
 {
-    // Create a for-loop that starts from index 0 to 255 (use BUFFER_LENGTH)
+    for (int i = 0; i <= BUFFER_LENGTH; i++){
+        printf("TX Data: 0x%02X | RX Data: 0x%02X\n", TX_Buffer[i], RX_Buffer[i]);
+        Clock_Delay1us(100);
+        if (TX_Buffer[i] != RX_Buffer[i]){
+            printf("MISMATCH! TX Data: 0x%02X | RX Data: 0x%02X\n", TX_Buffer[i], RX_Buffer[i]);
+        }
+    }
 
-    // Start of for-loop
-
-    // Print the contents of the TX Buffer and the RX Buffer in one line
-    // There should be a newline in each iteration
-
-    // Make a function call to Clock_Delay1us(100)
-
-    // Include a condition that checks if TX_Buffer[i] != RX_Buffer[i]
-    // If there is a data mismatch between TX Buffer and RX Buffer,
-    // print the data that are not the same
-
-    // End of for-loop
 }
 
 int main(void)
@@ -272,17 +262,17 @@ int main(void)
 
     while(1)
     {
-        UART_TX_Data = Transmit_UART_Data();
-        UART_RX_Data = EUSCI_A2_UART_InChar();
-        printf("TX Data: 0x%02X | RX Data: 0x%02X\n", UART_TX_Data, UART_RX_Data);
-        Clock_Delay1ms(100);
+//        UART_TX_Data = Transmit_UART_Data();
+//        UART_RX_Data = EUSCI_A2_UART_InChar();
+//        printf("TX Data: 0x%02X | RX Data: 0x%02X\n", UART_TX_Data, UART_RX_Data);
+//        Clock_Delay1ms(100);
 
-//        if (run_once == 0x01)
-//        {
-//            run_once = 0x00;
-//            UART_Ramp_Data();
-//            Validate_UART_Loopback();
-//        }
+        if (run_once == 0x01)
+        {
+            run_once = 0x00;
+            UART_Ramp_Data();
+            Validate_UART_Loopback();
+        }
     }
 }
 #endif

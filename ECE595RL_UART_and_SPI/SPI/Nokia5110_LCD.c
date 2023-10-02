@@ -160,7 +160,7 @@ void Nokia5110_SPI_Init()
 
     // Set the baud rate. The clock frequency used is 1 MHz.
     // N = (Clock Frequency) / (Baud Rate) = (12,000,000 / 1,000,000)
-    // N = 3
+    // N = 12
     EUSCI_A3->BRW |= 12;
 
     // Configure P9.4, P9.5, and P9.7 pins as primary module function

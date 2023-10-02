@@ -22,8 +22,8 @@
 #include "../inc/GPIO.h"
 
 // Comment or uncomment the lines to choose the SPI driver
-#define USE_SPI_TEST 1
-//#define USE_NOKIA_LCD 1
+//#define USE_SPI_TEST 1
+#define USE_NOKIA_LCD 1
 
 #ifdef USE_SPI_TEST
 #include "../inc/EUSCI_A3_SPI.h"
@@ -108,10 +108,10 @@ int main()
 
     while(1)
     {
-        counter = counter + 1;
-        Nokia5110_SetCursor(0, 3);
-        Nokia5110_OutUDec(counter);
-        Clock_Delay1ms(1000);
+//        counter = counter + 1;
+//        Nokia5110_SetCursor(0, 3);
+//        Nokia5110_OutUDec(counter);
+//        Clock_Delay1ms(1000);
     }
 }
 #endif

@@ -207,6 +207,17 @@ int main(void)
 uint8_t TX_Buffer[BUFFER_LENGTH];
 uint8_t RX_Buffer[BUFFER_LENGTH];
 
+
+/**
+ * @brief The UART_Ramp_Data function sends the numbers 0 to 255 and reads the UART bus.
+ *
+ * This function is used to test the UART module in a loop-back test fashion. This is done by using the EUSCI_A2_UART_OutChar() and EUSCI_A2_UART_InChar()
+ * functions to transmit the values from 0 to 255 and receive data from the bus simultaneously. Another function is used to verify that both data are the same.
+ *
+ * @param None
+ *
+ * @return None
+ */
 void UART_Ramp_Data()
 {
 
@@ -218,6 +229,16 @@ void UART_Ramp_Data()
 
 }
 
+/**
+ * @brief The Validate_UART_Loopback function verifies if the data sent and data received is the same.
+ *
+ * This function is used to verify whether loop-back test was successful or not by comparing the data sent in TX_Buffer and data received in RX_Buffer.
+ * It prints the content of both buffers and outputs a warning if they don't match.
+ *
+ * @param None
+ *
+ * @return None
+ */
 void Validate_UART_Loopback()
 {
     for (int i = 0; i <= BUFFER_LENGTH; i++){

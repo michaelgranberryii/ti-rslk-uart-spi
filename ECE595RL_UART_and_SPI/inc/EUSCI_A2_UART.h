@@ -9,7 +9,7 @@
  *       For this lab, only the P3.3 pin (UART TX) will be used to observe the transmitted data using an oscilloscope.
  *
  * For more information regarding the Enhanced Universal Serial Communication Interface (eUSCI),
- * refer to the MSP432Pxx Microcontrollers Technical Reference Manual
+ * refer to the MSP432Pxx Microcontroller Technical Reference Manual
  *
  * @author Aaron Nanas
  *
@@ -47,7 +47,27 @@
 void EUSCI_A2_UART_Init();
 
 /**
- * EUSCI_A2_UART_Init_V2
+ * @brief Initializes the UART module EUSCI_A2 for communication.
+ *
+ * This function configures the EUSCI_A2 module to enable UART communication
+ * with the following configuration:
+ *
+ * - Parity: Enabled (Odd)
+ * - Stop bits: 2
+ * - Data bits: 8
+ * - Baud rate: 9600
+ * - Mode: UART
+ * - MSB first
+ * - UART clock source: SMCLK
+ * - Interrupts disabled
+ *
+ * For more information regarding the registers used, refer to the eUSCI_A UART Registers section (24.4)
+ * of the MSP432Pxx Microcontroller Technical Reference Manual
+ *
+ * @note This function assumes that the necessary pin configurations for UART communication have been performed
+ *       on the corresponding pins. P3.2 is used for UART RX while P3.3 is used for UART TX.
+ *
+ * @return None
  */
 void EUSCI_A2_UART_Init_V2();
 

@@ -36,7 +36,21 @@
 #ifdef USE_NOKIA_LCD
 
 
-
+/**
+ * @brief The Change_Counter_Speed returns a delay value based on the status of the user buttons.
+ *
+ * This function returns different delay values that can be used with different functions based on the status of Button 1 and Button 2.
+ * The data transmitted corresponds to the button status according to the following mapping:
+ *
+ *  button_status         Delay Value
+ *  -------------      ----------------
+ *      0x00                1000
+ *      0x10                200
+ *      0x02                3000
+ *      0x12                1000
+ *
+ * @return delay value
+ */
 uint16_t Change_Counter_Speed()
 {
     uint8_t button_status = Get_Buttons_Status();

@@ -9,7 +9,7 @@
  *  - EUSCI_A2_UART: Used to transmit data using the P3.3 pin via UART based on the status of the user buttons.
  *                   Receives UART data using the P3.2 pin
  *
- * @author Aaron Nanas
+ * @author Michael Granberry, Abdullah Hendy, Aaron Nanas
  *
  */
 

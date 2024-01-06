@@ -12,7 +12,7 @@
  *       - P9.7 (MOSI, Master Out Slave In)
  *  - Nokia5110_LCD: Used to interface with the Nokia 5110 LCD
  *
- * @author Aaron Nanas
+ * @author Michael Granberry, Abdullah Hendy, Aaron Nanas
  *
  */
 
